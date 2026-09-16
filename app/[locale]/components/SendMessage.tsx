@@ -39,19 +39,28 @@ export default function SendMessage({chat}:{chat:any}){
 
                 socket.onmessage = (event)=>{
                     const data = JSON.parse(event.data)
-                    setMessages([...messages,data.message])
+                    setMessages((prev)=>[...prev,data.message])
+                    
                 }
+
+                return () => {
+                    socket.close();
+                };
 
             } catch (error) {
                 console.log(error)
             }
+
+            
         }
 
         connectingWithWSSwerver()
-    },[chat, messages, setMessages])
+    },[])
 
 
     const inputRef = useRef<HTMLInputElement | null>(null);
+
+
     const sendMessageHandler = ()=>{
         inputRef.current?.focus()
         const socket = socketRef.current
@@ -65,6 +74,8 @@ export default function SendMessage({chat}:{chat:any}){
             senderId:chat.userId,
             chatId:chat.chat.id
         }))
+
+
         setNewMessage("")
         
     }
