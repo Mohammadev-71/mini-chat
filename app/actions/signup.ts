@@ -36,7 +36,12 @@ export async function signupAction(prevState: any, formData: FormData){
 
     try {
 
-        
+        if (!(img instanceof File)) {
+        return {
+            success: false,
+            message: "Please select a valid image",
+        };
+        }
         
         if(img){
 
@@ -46,7 +51,7 @@ export async function signupAction(prevState: any, formData: FormData){
 
             const buffer = Buffer.from(bytes);
 
-            const outputBuffer =  await sharp(buffer).webp({quality:80}).toBuffer("output.webp")
+            const outputBuffer =  await sharp(buffer).webp({quality:80}).toBuffer()
 
 
             const uploadedImg = await new Promise<{
