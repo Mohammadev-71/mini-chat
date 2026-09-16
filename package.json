@@ -9,19 +9,32 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@better-auth/prisma-adapter": "^1.7.3",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "7.10.0",
+    "better-auth": "^1.7.3",
+    "cloudinary": "^2.11.0",
     "next": "16.3.4",
+    "next-intl": "^4.14.3",
+    "next-themes": "^0.4.6",
+    "pg": "^8.23.0",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "react-icons": "^5.7.0",
+    "sharp": "0.35.4",
+    "zod": "^4.6.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.3.4",
+    "prisma": "7.10.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "packageManager": "pnpm@12.3.4"
+  "packageManager": "pnpm@11.27.0+sha512.ad12821463bb143295f1fa3ecde77a6b9b97a7990386da800ff57bffc3964dc64b7b1c7559d5dbe5c337aea659ed9c8937d4370bd198ca2009bc6fa0249808e7"
 }

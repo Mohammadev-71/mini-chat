@@ -1,0 +1,61 @@
+{
+    "signup":{
+        "title":"Sign Up",
+        "label":{
+            "name":"User Name",
+            "email":"Email Address",
+            "password":"Password"
+        },
+        "placeholder":{
+            "name":"Enter your name",
+            "email":"Enter your email",
+            "password":"Enter your password"
+        },
+        "haveAccount":"Already have account?",
+        "signinLink":"Signin",
+        "submitBtn":"Submit",
+        "errors":{
+            "TOO_SHORT":"Must be at least between 5-20 Characters",
+            "TYPES":"The accepted type is [jpeg, jpg, png, webp]",
+            "TOO_LONG":"Must be at least between 5-20 Characters",
+            "SHORT_PASS":"Password must be at least between 8-32 Characters",
+            "LONG_PASS":"Password must be at least between 8-32 Characters",
+            "INVALID_PASS":"Password must include number, capital, small, sing",
+            "EMAIL":"Invalid Email"
+        }
+    },
+    "signin":{
+        "title":"Sign In",
+        "label":{
+            "name":"User Name",
+            "email":"Email Address",
+            "password":"Password"
+        },
+        "placeholder":{
+            "name":"Enter your name",
+            "email":"Enter your email",
+            "password":"Enter your password"
+        },
+        "signup":"Don't have account?",
+        "signupLink":"Signup",
+        "submitBtn":"Submit",
+        "errors":{
+            "TOO_SHORT":"Must be at least between 5-20 Characters",
+            "TOO_LONG":"Must be at least between 5-20 Characters",
+            "SHORT_PASS":"Password must be at least between 8-32 Characters",
+            "LONG_PASS":"Password must be at least between 8-32 Characters",
+            "INVALID_PASS":"Password must include number, capital, small, sing",
+            "EMAIL":"Invalid Email"
+        }
+    },
+    "home":{
+        "settings":{
+            "title":"Mini Chat"
+        },
+        "user":{
+            "title":"Your account"
+        },
+        "title":"Choose to chat",
+        "subtitle":"Choose an user form your contacts  section to start chatting with hem "
+    }
+}
