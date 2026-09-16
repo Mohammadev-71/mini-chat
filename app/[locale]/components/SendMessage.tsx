@@ -16,7 +16,10 @@ type message = {
     isRead:boolean
 }
 
-
+type typingStatus = {
+    isTyping:boolean,
+    isTyper:boolean
+}
 
 
 export default function SendMessage({chat}:{chat:any}){
@@ -25,7 +28,7 @@ export default function SendMessage({chat}:{chat:any}){
     const [messages, setMessages] = useState<message[]>(chat?.chat?.messages)
     const [newMessage, setNewMessage] = useState<string>("")
     const socketRef = useRef<WebSocket | null>(null);
-
+    const [typingStatus, setTypingStatus] = useState<typingStatus>({isTyping:false, isTyper:false})
 
     useEffect(()=>{
         const connectingWithWSSwerver = ()=>{
@@ -39,8 +42,18 @@ export default function SendMessage({chat}:{chat:any}){
 
                 socket.onmessage = (event)=>{
                     const data = JSON.parse(event.data)
+                    if(data.type==="typing"){
+                        const isTyper = chat.userId === data.senderId
+                        setTypingStatus({isTyping:true,isTyper:isTyper})
+
+                        setTimeout(() => {
+                            setTypingStatus({isTyping:false,isTyper:false})
+                        },1000 );
+                        return
+                    }
+
+                    setTypingStatus({isTyping:false,isTyper:false})
                     setMessages((prev)=>[...prev,data.message])
-                    
                 }
 
                 return () => {
@@ -70,6 +83,7 @@ export default function SendMessage({chat}:{chat:any}){
         }
 
         socket.send(JSON.stringify({
+            type:"message",
             content:newMessage,
             senderId:chat.userId,
             chatId:chat.chat.id
@@ -77,23 +91,35 @@ export default function SendMessage({chat}:{chat:any}){
 
 
         setNewMessage("")
-        
     }
 
-    
+
+    const typing = ()=>{
+        const socket = socketRef.current
+
+        if(!socket || socket.readyState !== WebSocket.OPEN){
+            console.log("WebSocket is not connected")
+            return
+        }
+
+        socket.send(JSON.stringify({
+            type:"typing",
+            senderId:chat.userId,
+            chatId:chat.chat.id
+        }))
+    }
     
     return(
 
         <div className="h-full w-full flex flex-col justify-between relative">
-            <MessagesArea messages={messages} userId={chat?.userId}/>
+            <MessagesArea messages={messages} userId={chat?.userId} typingStatus={typingStatus}/>
 
             <form onSubmit={(e)=>{e.preventDefault(); sendMessageHandler()}} className="bg-white/40 dark:bg-black/40 shadow-lg rounded-lg">
                 <div dir="ltr" className="flex gap-2 justify-center items-center w-full px-4">
-                    <input ref={inputRef} value={newMessage} onChange={(e)=>{setNewMessage(e.target.value)}} type="text" className="w-full outline-none p-2.5 text-lg text-indigo-800 dark:text-white" name="" id="" />
+                    <input onKeyDown={typing} ref={inputRef} value={newMessage} onChange={(e)=>{setNewMessage(e.target.value)}} type="text" className="w-full outline-none p-2.5 text-lg text-indigo-800 dark:text-white" name="" id="" />
                     <button type="submit" className="cursor-pointer text-indigo-700 dark:text-white hover:text-indigo-300">
                         <IoSendSharp size={22}/>
                     </button>
-                    
                 </div>
             </form>
         </div>

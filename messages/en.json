@@ -56,6 +56,7 @@
             "title":"Your account"
         },
         "title":"Choose to chat",
-        "subtitle":"Choose an user form your contacts  section to start chatting with hem "
+        "subtitle":"Choose an user form your contacts  section to start chatting with hem ",
+        "typing":"Typing..."
     }
 }
