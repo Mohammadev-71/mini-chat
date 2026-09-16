@@ -63,10 +63,7 @@ export default function SendMessage({chat}:{chat:any}){
             } catch (error) {
                 console.log(error)
             }
-
-            
         }
-
         connectingWithWSSwerver()
     },[])
 
@@ -112,6 +109,7 @@ export default function SendMessage({chat}:{chat:any}){
     return(
 
         <div className="h-full w-full flex flex-col justify-between relative">
+            
             <MessagesArea messages={messages} userId={chat?.userId} typingStatus={typingStatus}/>
 
             <form onSubmit={(e)=>{e.preventDefault(); sendMessageHandler()}} className="bg-white/40 dark:bg-black/40 shadow-lg rounded-lg">

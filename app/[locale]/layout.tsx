@@ -3,8 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { NextIntlClientProvider } from "next-intl";
-import { usePathname } from "@/i18n/navigation";
-import Contacts from "./components/Contacts";
+import ServiceWorkerRegister from "./components/ServiceWorkerRegister"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,6 +44,7 @@ export default async function RootLayout({ children, params }: RooLayoutProps) {
             enableSystem
             disableTransitionOnChange
           >
+            <ServiceWorkerRegister/>
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
